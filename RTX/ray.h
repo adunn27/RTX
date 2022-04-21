@@ -13,4 +13,8 @@ public:
 
 	point3 origin() const { return m_origin; }
 	vec3 direction() const { return m_dir; }
+
+	point3 at(double t) const {
+		return m_origin + m_dir * t;
+	}
 };

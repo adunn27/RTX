@@ -13,11 +13,15 @@ public:
 	double y() const { return e[1]; }
 	double z() const { return e[2]; }
 
+	double length_squared() {
+		return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
+	}
+	
 	double length() {
-		return std::sqrt(e[0] * e[0] + e[1] * e[1] + e[2] * e[2]);
+		return std::sqrt(length_squared());
 	}
 
-	double operator[](int i) const { return e[i]; } //TODO is this slow?
+	inline double operator[](int i) const { return e[i]; } //TODO is this slow?
 
 	inline vec3 unit_vector();
 };
@@ -47,6 +51,12 @@ inline vec3 operator+(const vec3& v1, const vec3& v2) {
 
 inline vec3 operator-(const vec3& v1, const vec3& v2) {
 	return vec3(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
+}
+
+inline double vector_dot(const vec3& v1, const vec3& v2) {
+	return v1[0] * v2[0]
+		+ v1[1] * v2[1]
+		+ v1[2] * v2[2];
 }
 
 inline vec3 vec3::unit_vector() {
