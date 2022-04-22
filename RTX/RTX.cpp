@@ -56,7 +56,15 @@ int main() {
 
 	// Camera
 	
-	camera cam(point3(-2, 2, 1), point3(0, 0, -1), vec3(0, 1, 0), 90.0, aspect_ratio);
+	camera cam(
+		point3(-2, 2, 1),
+		point3(0, 0, -1),
+		vec3(0, 1, 0),
+		20,
+		aspect_ratio,
+		2.0,
+		(point3(-2, 2, 1) - point3(0, 0, -1)).length()
+	);
 
 	// Render
 
