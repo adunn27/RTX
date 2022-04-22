@@ -8,6 +8,7 @@
 #include "hittable.h"
 #include "hittable_list.h"
 #include "sphere.h"
+#include "camera.h"
 
 color ray_color(const ray& r, const hittable& world) {
     hit_record rec;
@@ -26,6 +27,7 @@ int main() {
     const double aspect_ratio = 16.0 / 9.0;
     const int image_height = 256;
     const int image_width = static_cast<int>(aspect_ratio * image_height);
+    const int samples_per_pixel = 100;
 
     // World
     hittable_list world;
@@ -33,15 +35,7 @@ int main() {
     world.add(std::make_shared<sphere>(point3(0, -100.5, -1), 100));
 
     // Camera
-
-    double viewport_height = 2.0;
-    double viewport_width = aspect_ratio * viewport_height;
-    double focal_length = 1.0;
-
-    point3 origin(0, 0, 0);
-    vec3 horizontal(viewport_width, 0, 0);
-    vec3 vertical(0, viewport_height, 0);
-    auto bottom_left_corner = origin - horizontal / 2 - vertical / 2 - vec3(0, 0, focal_length);
+    camera cam;
 
     // Render
 
@@ -51,24 +45,16 @@ int main() {
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
 
         for (int i = 0; i < image_width; i++) {
-            auto u = double(i) / (image_width - 1);
-            auto v = double(j) / (image_height - 1);
-            ray r(origin, bottom_left_corner + u * horizontal + v * vertical - origin);
-            color pix = ray_color(r, world);
-            write_color(std::cout, pix);
+            color pix(0, 0, 0);
+            for (int s = 0; s < samples_per_pixel; s++) {
+                auto u = (i + random_double()) / (image_width - 1);
+                auto v = (j + random_double()) / (image_height - 1);
+                pix += ray_color(cam.get_ray(u, v), world);
+            }
+            write_color(std::cout, pix, samples_per_pixel);
         }
     }
 
     std::cerr << "\nDone.\n";
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
