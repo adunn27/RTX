@@ -25,6 +25,10 @@ public:
 
 	inline vec3 unit_vector();
 
+	inline static vec3 random(double min, double max) {
+		return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
+	}
+
 	inline vec3& operator+=(const vec3& v) {
 		e[0] += v[0];
 		e[1] += v[1];
@@ -73,4 +77,13 @@ inline double vector_dot(const vec3& v1, const vec3& v2) {
 
 inline vec3 vec3::unit_vector() {
 	return *this / this->length();
+}
+
+vec3 random_in_unit_sphere() {
+	while (true) {
+		auto p = vec3::random(-1, 1);
+		if (p.length_squared() >= 1)
+			continue;
+		return p;
+	}
 }

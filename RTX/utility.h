@@ -9,6 +9,7 @@
 
 const double inf = std::numeric_limits<double>::infinity();
 const double pi = 3.14159265358932385;
+const double aspect_ratio = 16.0 / 9.0;
 
 // Functions
 
