@@ -11,16 +11,26 @@ private:
 	vec3 vertical;
 
 public:
-	camera() {
-		double viewport_height = 2.0;
+	camera(
+		point3 from,
+		point3 to,
+		vec3 vup,
+		double vfov,
+		double aspect_ratio
+	) {
+		auto theta = deg_to_rad(vfov);
+		double viewport_height = 2.0 * tan(theta/2);
 		double viewport_width = aspect_ratio * viewport_height;
 		double focal_length = 1.0;
 
-		origin = point3(0, 0, 0);
-		horizontal = vec3(viewport_width, 0, 0);
-		vertical = vec3(0, viewport_height, 0);
-		bottom_left_corner = origin - horizontal / 2 - vertical / 2 - vec3(0, 0, focal_length);
+		auto w = (from - to).unit_vector();
+		auto u = vector_cross(vup, w).unit_vector();
+		auto v = vector_cross(w, u);
 
+		origin = from;
+		horizontal = viewport_width * u;
+		vertical = viewport_height * v;
+		bottom_left_corner = origin - horizontal / 2 - vertical / 2 - w;
 	}
 
 	ray get_ray(double u, double v) const {

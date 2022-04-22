@@ -80,6 +80,12 @@ inline double vector_dot(const vec3& v1, const vec3& v2) {
 		+ v1[2] * v2[2];
 }
 
+inline vec3 vector_cross(const vec3& v1, const vec3& v2) {
+	return vec3(v1[1] * v2[2] - v1[2] * v2[1],
+		v1[2] * v2[0] - v1[0] * v2[2],
+		v1[0] * v2[1] - v1[1] * v2[0]);
+}
+
 inline vec3 vec3::unit_vector() {
 	return *this / this->length();
 }

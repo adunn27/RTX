@@ -33,6 +33,7 @@ int main() {
 
 	// Image
 	
+	const double aspect_ratio = 16.0 / 9.0;
 	const int image_height = 256;
 	const int image_width = static_cast<int>(aspect_ratio * image_height);
 	const int samples_per_pixel = 100;
@@ -50,12 +51,12 @@ int main() {
 	world.add(std::make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
 	world.add(std::make_shared<sphere>(point3(0.0, 0.0, -1.0), 0.5, material_center));
 	world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
-	world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.4, material_left));
+	world.add(std::make_shared<sphere>(point3(0.0, 0.0, -1.0), -0.4, material_center));
 	world.add(std::make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
 
 	// Camera
 	
-	camera cam;
+	camera cam(point3(-2, 2, 1), point3(0, 0, -1), vec3(0, 1, 0), 90.0, aspect_ratio);
 
 	// Render
 
