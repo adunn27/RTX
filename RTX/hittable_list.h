@@ -32,4 +32,20 @@ public:
 		return hit_anything;
 	}
 
+	virtual bool bounding_box(double t0, double t1, aabb& output_box) const {
+		if (objects.empty())
+			return false;
+
+		aabb temp_box;
+		bool first_box = true;
+
+		for (const auto& obj : objects) {
+			if (!obj->bounding_box(t0, t1, temp_box))
+				return false;
+			output_box = first_box ? temp_box : surrounding_box(output_box, temp_box);
+			first_box = false;
+		}
+
+		return true;
+	}
 };
