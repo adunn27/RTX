@@ -8,7 +8,8 @@ class material;
 struct hit_record {
 	point3 p;
 	vec3 normal;
-	double t;
+	double t; // Time of hit
+	double u, v; // Surface coord of hit
 	bool front_face;
 	std::shared_ptr<material> material_ptr;
 
