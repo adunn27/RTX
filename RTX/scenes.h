@@ -151,7 +151,7 @@ hittable_list final_scene() {
 	objects.add(std::make_shared<constant_medium>(boundary, .0001, color(1, 1, 1)));
 
 	objects.add(std::make_shared<sphere>(point3(400, 200, 400), 100, std::make_shared<lambertian>(color(1, 0, 0))));
-	auto emat = std::make_shared<lambertian>(std::make_shared<image_texture>("earthmap.jpg"));
+	auto emat = std::make_shared<lambertian>(std::make_shared<image_texture>("texture\\earthmap.jpg"));
 	objects.add(std::make_shared<sphere>(point3(220, 280, 300), 80, emat));
 
 	hittable_list boxes2;
