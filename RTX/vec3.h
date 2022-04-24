@@ -22,6 +22,7 @@ public:
 	}
 
 	inline double operator[](int i) const { return e[i]; } //TODO is this slow?
+	inline double& operator[](int i) { return e[i]; } //TODO is this slow?
 
 	inline vec3 unit_vector();
 

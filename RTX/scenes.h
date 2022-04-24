@@ -7,6 +7,7 @@
 #include "material.h"
 #include "sphere.h"
 #include "rect.h"
+#include "box.h"
 
 hittable_list earth() {
 	auto earth_texture = std::make_shared<image_texture>("texture\\earthmap.jpg");
@@ -85,12 +86,24 @@ hittable_list cornell_box() {
 	auto green = std::make_shared<lambertian>(color(.12, .45, .15));
 	auto light = std::make_shared<diffuse_light>(color(15, 15, 15));
 
+	// Create walls and light
 	objects.add(std::make_shared<yz_rect>(0, 555, 0, 555, 555, green));
 	objects.add(std::make_shared<yz_rect>(0, 555, 0, 555, 0, red));
 	objects.add(std::make_shared<xz_rect>(213, 343, 227, 332, 554, light));
 	objects.add(std::make_shared<xz_rect>(0, 555, 0, 555, 0, white));
 	objects.add(std::make_shared<xz_rect>(0, 555, 0, 555, 555, white));
 	objects.add(std::make_shared<xy_rect>(0, 555, 0, 555, 555, white));
+
+	// Add boxes
+	std::shared_ptr<hittable> box0 = std::make_shared<box>(point3(0, 0, 0), point3(165, 330, 165), white);
+	box0 = std::make_shared<rotate_y>(box0, 15);
+	box0 = std::make_shared<translate>(box0, vec3(265, 0, 295));
+	objects.add(box0);
+
+	std::shared_ptr<hittable> box1 = std::make_shared<box>(point3(0, 0, 0), point3(165, 165, 165), white);
+	box1 = std::make_shared<rotate_y>(box1, -18);
+	box1 = std::make_shared<translate>(box1, vec3(130, 0, 65));
+	objects.add(box1);
 
 	return objects;
 }
