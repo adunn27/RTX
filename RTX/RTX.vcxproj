@@ -147,9 +147,11 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="external\stb_image.h" />
+    <ClInclude Include="rect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="rtw_stbh_image.h" />
     <ClInclude Include="material.h" />
+    <ClInclude Include="scenes.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="utility.h" />
     <ClInclude Include="hittable_list.h" />

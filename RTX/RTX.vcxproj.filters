@@ -65,6 +65,12 @@
     <ClInclude Include="external\stb_image.h">
       <Filter>External</Filter>
     </ClInclude>
+    <ClInclude Include="rect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RTX.rc">
