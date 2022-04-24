@@ -69,7 +69,7 @@ hittable_list simple_light() {
 
 	auto pertext = std::make_shared<solid_color>(color(0.8, 0.5, 0.3));
 	objects.add(std::make_shared<sphere>(point3(0, -1000, 0), 1000, std::make_shared<lambertian>(pertext)));
-	objects.add(std::make_shared<sphere>(point3(0, 2, 0), 2, std::make_shared<lambertian>(pertext)));
+	objects.add(std::make_shared<sphere>(point3(-2, 2, 3), 2, std::make_shared<lambertian>(pertext)));
 
 	auto difflight = std::make_shared<diffuse_light>(color(4, 4, 4));
 	objects.add(std::make_shared<rect>(3, 5, 1, 3, -2, difflight));
