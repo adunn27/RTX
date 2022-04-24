@@ -30,7 +30,7 @@ color ray_color(const ray& r, const hittable& world, int depth) {
 }
 
 hittable_list earth() {
-	auto earth_texture = std::make_shared<image_texture>("earthmap.jpg");
+	auto earth_texture = std::make_shared<image_texture>("texture\\earthmap.jpg");
 	auto earth_surface = std::make_shared<lambertian>(earth_texture);
 	auto globe = std::make_shared<sphere>(point3(0, 0, 0), 2, earth_surface);
 
@@ -90,7 +90,7 @@ int main() {
 	// Image
 	
 	const auto aspect_ratio = 3.0 / 2.0;
-	const int image_width = 100;
+	const int image_width = 500;
 	const int image_height = static_cast<int>(image_width / aspect_ratio);
 	const int samples_per_pixel = 500;
 	const int max_depth = 50;
@@ -123,7 +123,7 @@ int main() {
 		lookfrom = point3(13, 2, 3);
 		lookat = point3(0, 0, 0);
 		vfov = 20.0;
-		break
+		break;
 	}
 
 	camera cam(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus);

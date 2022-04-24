@@ -17,6 +17,7 @@ public:
 
 public:
 	lambertian(const color& a) : albedo(std::make_shared<solid_color>(a)) {}
+	lambertian(std::shared_ptr<texture> a) : albedo(a) {}
 
 	virtual bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered) const override {
 		auto scatter_dir = rec.normal + random_unit_vector();

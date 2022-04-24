@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="External">
-      <UniqueIdentifier>{47cfd165-37bc-4a36-8e24-620a7167cb4b}</UniqueIdentifier>
+      <UniqueIdentifier>{0083dd45-da7c-43ff-aad4-2955b819b24b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
