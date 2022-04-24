@@ -72,7 +72,25 @@ hittable_list simple_light() {
 	objects.add(std::make_shared<sphere>(point3(-2, 2, 3), 2, std::make_shared<lambertian>(pertext)));
 
 	auto difflight = std::make_shared<diffuse_light>(color(4, 4, 4));
-	objects.add(std::make_shared<rect>(3, 5, 1, 3, -2, difflight));
+	objects.add(std::make_shared<xy_rect>(3, 5, 1, 3, -2, difflight));
+
+	return objects;
+}
+
+hittable_list cornell_box() {
+	hittable_list objects;
+
+	auto red = std::make_shared<lambertian>(color(.65, .05, .05));
+	auto white = std::make_shared<lambertian>(color(.73, .73, .73));
+	auto green = std::make_shared<lambertian>(color(.12, .45, .15));
+	auto light = std::make_shared<diffuse_light>(color(15, 15, 15));
+
+	objects.add(std::make_shared<yz_rect>(0, 555, 0, 555, 555, green));
+	objects.add(std::make_shared<yz_rect>(0, 555, 0, 555, 0, red));
+	objects.add(std::make_shared<xz_rect>(213, 343, 227, 332, 554, light));
+	objects.add(std::make_shared<xz_rect>(0, 555, 0, 555, 0, white));
+	objects.add(std::make_shared<xz_rect>(0, 555, 0, 555, 555, white));
+	objects.add(std::make_shared<xy_rect>(0, 555, 0, 555, 555, white));
 
 	return objects;
 }

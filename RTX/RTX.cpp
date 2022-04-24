@@ -37,11 +37,11 @@ int main() {
 
 	// Image
 	
-	const auto aspect_ratio = 3.0 / 2.0;
-	const int image_width = 500;
-	const int image_height = static_cast<int>(image_width / aspect_ratio);
-	const int samples_per_pixel = 500;
-	const int max_depth = 50;
+	auto aspect_ratio = 3.0 / 2.0;
+	int image_width = 500;
+	int image_height = static_cast<int>(image_width / aspect_ratio);
+	int samples_per_pixel = 500;
+	int max_depth = 50;
 
 	// World
 
@@ -73,12 +73,20 @@ int main() {
 		lookat = point3(0, 0, 0);
 		vfov = 20.0;
 		break;
-	default:
 	case 3:
 		world = simple_light();
 		lookfrom = point3(26, 3, 6);
 		lookat = point3(0, 2, 0);
 		vfov = 20.0;
+		break;
+	default:
+	case 4:
+		world = cornell_box();
+		aspect_ratio = 1.0;
+		image_width = image_height = 600;
+		lookfrom = point3(278, 278, -800);
+		lookat = point3(278, 278, 0);
+		vfov = 40.0;
 		break;
 	}
 
