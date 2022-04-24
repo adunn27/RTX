@@ -79,12 +79,21 @@ int main() {
 		lookat = point3(0, 2, 0);
 		vfov = 20.0;
 		break;
-	default:
 	case 4:
 		world = cornell_box();
 		aspect_ratio = 1.0;
 		image_width = image_height = 600;
 		lookfrom = point3(278, 278, -800);
+		lookat = point3(278, 278, 0);
+		vfov = 40.0;
+		break;
+	default:
+	case 5:
+		world = final_scene();
+		aspect_ratio = 1.0;
+		image_width = image_height = 800;
+		samples_per_pixel = 10000;
+		lookfrom = point3(478, 278, -600);
 		lookat = point3(278, 278, 0);
 		vfov = 40.0;
 		break;

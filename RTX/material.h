@@ -102,3 +102,18 @@ public:
 	}
 };
 
+class isotropic : public material {
+public:
+	std::shared_ptr<texture> albedo;
+
+public:
+	isotropic(std::shared_ptr<texture> fog_texture) : albedo(fog_texture) {}
+	isotropic(color c) : albedo(std::make_shared<solid_color>(c)) {}
+
+	virtual bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered) const override {
+		scattered = ray(rec.p, random_in_unit_sphere());
+		attenuation = albedo->value(rec.u, rec.v, rec.p);
+		return true;
+	}
+};
+
