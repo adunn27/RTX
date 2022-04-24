@@ -67,7 +67,7 @@ public:
 		} else {
 			std::sort(objs_modifiable.begin() + start, objs_modifiable.begin() + end, comparator);
 
-			auto mid = start + obj_span;
+			auto mid = start + obj_span / 2;
 			left = std::make_shared<bvh_node>(objs_modifiable, start, mid, t0, t1);
 			right = std::make_shared<bvh_node>(objs_modifiable, mid, end, t0, t1);
 		}
