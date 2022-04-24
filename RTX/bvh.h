@@ -55,21 +55,21 @@ public:
 		size_t obj_span = end - start;
 
 		if (obj_span == 1) {
-			left = right = objs[start];
+			left = right = objs_modifiable[start];
 		} else if (obj_span == 2) {
-			if (comparator(objs[start], objs[start + 1])) {
-				left = objs[start];
-				right = objs[start + 1];
+			if (comparator(objs_modifiable[start], objs_modifiable[start + 1])) {
+				left = objs_modifiable[start];
+				right = objs_modifiable[start + 1];
 			} else {
-				left = objs[start + 1];
-				right = objs[start];
+				left = objs_modifiable[start + 1];
+				right = objs_modifiable[start];
 			}
 		} else {
-			std::sort(objs.begin() + start, objs.begin() + end, comparator);
+			std::sort(objs_modifiable.begin() + start, objs_modifiable.begin() + end, comparator);
 
 			auto mid = start + obj_span;
-			left = std::make_shared<bvh_node>(objs, start, mid, t0, t1);
-			right = std::make_shared<bvh_node>(objs, mid, end, t0, t1);
+			left = std::make_shared<bvh_node>(objs_modifiable, start, mid, t0, t1);
+			right = std::make_shared<bvh_node>(objs_modifiable, mid, end, t0, t1);
 		}
 
 		aabb box_left, box_right;

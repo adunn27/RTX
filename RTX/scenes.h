@@ -150,7 +150,7 @@ hittable_list final_scene() {
 	boundary = std::make_shared<sphere>(point3(0, 0, 0), 5000, std::make_shared<dielectric>(1.5));
 	objects.add(std::make_shared<constant_medium>(boundary, .0001, color(1, 1, 1)));
 
-	objects.add(std::make_shared<sphere>(point3(400, 200, 400), 100, color(1, 0, 0)));
+	objects.add(std::make_shared<sphere>(point3(400, 200, 400), 100, std::make_shared<lambertian>(color(1, 0, 0))));
 	auto emat = std::make_shared<lambertian>(std::make_shared<image_texture>("earthmap.jpg"));
 	objects.add(std::make_shared<sphere>(point3(220, 280, 300), 80, emat));
 
@@ -170,5 +170,4 @@ hittable_list final_scene() {
 
 	return objects;
 }
-
 
