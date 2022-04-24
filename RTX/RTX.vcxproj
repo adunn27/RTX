@@ -146,6 +146,7 @@
     <ClInclude Include="bvh.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="external\stb_image.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="rtw_stbh_image.h" />
     <ClInclude Include="material.h" />
@@ -158,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RTX.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="texture\earthmap.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

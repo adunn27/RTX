@@ -29,6 +29,14 @@ color ray_color(const ray& r, const hittable& world, int depth) {
 	return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
 }
 
+hittable_list earth() {
+	auto earth_texture = std::make_shared<image_texture>("earthmap.jpg");
+	auto earth_surface = std::make_shared<lambertian>(earth_texture);
+	auto globe = std::make_shared<sphere>(point3(0, 0, 0), 2, earth_surface);
+
+	return hittable_list(globe);
+}
+
 hittable_list random_scene() {
 	hittable_list world;
 
@@ -89,17 +97,36 @@ int main() {
 
 	// World
 
-	hittable_list world = random_scene();
+	hittable_list world;
 
 	// Camera
 
-	point3 lookfrom(13, 2, 3);
-	point3 lookat(0, 0, 0);
+	point3 lookfrom;
+	point3 lookat;
 	vec3 vup(0, 1, 0);
 	auto dist_to_focus = 10.0;
 	auto aperture = 0.1;
+	auto vfov = 40.0;
 
-	camera cam(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
+	// Scene Picker
+	switch (0) {
+	case 1:
+		world = random_scene();
+		lookfrom = point3(13, 2, 3);
+		lookat = point3(0, 0, 0);
+		vfov = 20.0;
+		aperture = 0.1;
+		break;
+	default:
+	case 2:
+		world = earth();
+		lookfrom = point3(13, 2, 3);
+		lookat = point3(0, 0, 0);
+		vfov = 20.0;
+		break
+	}
+
+	camera cam(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus);
 
 	// Render
 
