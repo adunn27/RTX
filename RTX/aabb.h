@@ -38,8 +38,8 @@ aabb surrounding_box(const aabb& box0, const aabb& box1) {
 	);
 	
 	point3 big(fmax(box0.max[0], box1.max[0]),
-		fmin(box0.max[1], box1.max[1]),
-		fmin(box0.max[2], box1.max[2])
+		fmax(box0.max[1], box1.max[1]),
+		fmax(box0.max[2], box1.max[2])
 	);
 
 	return aabb(small, big);
