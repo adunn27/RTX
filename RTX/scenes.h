@@ -111,6 +111,9 @@ hittable_list cornell_box() {
 }
 
 hittable_list final_scene() {
+	hittable_list objects;
+
+	// Add the tiled floor
 	hittable_list boxes1;
 	auto ground = std::make_shared<lambertian>(color(0.48, 0.83, 0.53));
 
@@ -128,9 +131,6 @@ hittable_list final_scene() {
 			boxes1.add(std::make_shared<box>(point3(x0, y0, z0), point3(x1, y1, z1), ground));
 		}
 	}
-
-	hittable_list objects;
-
 	objects.add(std::make_shared<bvh_node>(boxes1, 0, 1));
 
 	auto light = std::make_shared<diffuse_light>(color(7, 7, 7));

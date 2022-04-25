@@ -54,7 +54,7 @@ int main() {
 	point3 lookat;
 	vec3 vup(0, 1, 0);
 	auto dist_to_focus = 10.0;
-	auto aperture = 0.1;
+	auto aperture = 0.0;
 	auto vfov = 40.0;
 
 	// Scene Picker
@@ -92,7 +92,7 @@ int main() {
 		world = final_scene();
 		aspect_ratio = 1.0;
 		image_width = image_height = 800;
-		samples_per_pixel = 10000;
+		samples_per_pixel = 10;
 		lookfrom = point3(478, 278, -600);
 		lookat = point3(278, 278, 0);
 		vfov = 40.0;
