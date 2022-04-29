@@ -4,6 +4,12 @@ A C++ RayTracer made following the [_Ray Tracing in One Weekend_](https://raytra
 
 ## Output Pictures
 
+![Render of many spheres](/images/many_orbs.png)
+
+![Render of a foggy scene](/images/final_scene.png)
+
+![Render of Cornell Box](/images/cornell_box.png)
+
 ## Features:
 
 - Anti-Aliasing
