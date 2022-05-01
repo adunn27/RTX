@@ -30,10 +30,6 @@ A C++ RayTracer made following the [_Ray Tracing in One Weekend_](https://raytra
 ## How to use
 
 Import the .sln file using Visual Studio and build the program.
-Using Command Line (currently needs to be cmd not PowerShell due to the text encoding, but this is being worked on) go to its build directory and run 
+Then go to the output directory and click `RTX.exe` and it will output a `output.ppm` image file in the same directory.
+You can also run it from the command line and give a different filename as the first argument to output to a different file.
 
-```
-.\RTX.exe > FILENAME.ppm
-``` 
-
-With `FILENAME` adjusted to your desired output filename
