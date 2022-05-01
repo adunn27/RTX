@@ -12,11 +12,16 @@
 #include "bvh.h"
 
 hittable_list earth() {
+
 	auto earth_texture = std::make_shared<image_texture>("texture\\earthmap.jpg");
 	auto earth_surface = std::make_shared<lambertian>(earth_texture);
 	auto globe = std::make_shared<sphere>(point3(0, 0, 0), 2, earth_surface);
+	auto scene = hittable_list(globe);
 
-	return hittable_list(globe);
+	auto light = std::make_shared<diffuse_light>(color(7, 7, 7));
+	scene.add(std::make_shared<sphere>(point3(100100, 100100, 100100), 100000, light));
+
+	return scene;
 }
 
 hittable_list random_scene() {
