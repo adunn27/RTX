@@ -1,6 +1,10 @@
 // RTX.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // Based on https://raytracing.github.io/books/RayTracingInOneWeekend.html#overview
 
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+
 #include "utility.h"
 #include "vec3.h"
 #include "color.h"
@@ -22,7 +26,6 @@ color ray_color(const ray& r, const color& background_color, const hittable& wor
 	if (!world.hit(r, 0.001, inf, rec))
 		return background_color;
 
-
 	ray scattered;
 	color attenuation;
 	color emitted = rec.material_ptr->emitted(rec.u, rec.v, rec.p);
@@ -33,7 +36,24 @@ color ray_color(const ray& r, const color& background_color, const hittable& wor
 	return emitted + attenuation * ray_color(scattered, background_color, world, depth - 1);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+
+	// File
+
+	std::string filepath = ".\\";
+	if (argc > 1)
+		filepath.append(argv[1]).append(".ppm");
+	else
+		filepath.append("output.ppm");
+
+	if (std::filesystem::exists(filepath)) {
+		std::cerr << "ERROR: File '" << filepath << "' already exists.\n";
+		system("pause");
+		return -1;
+	}
+
+	std::ofstream filestream;
+	filestream.open(filepath);
 
 	// Image
 	
@@ -67,6 +87,7 @@ int main() {
 		vfov = 20.0;
 		aperture = 0.1;
 		break;
+	default:
 	case 2:
 		world = earth();
 		lookfrom = point3(13, 2, 3);
@@ -87,7 +108,6 @@ int main() {
 		lookat = point3(278, 278, 0);
 		vfov = 40.0;
 		break;
-	default:
 	case 5:
 		world = final_scene();
 		aspect_ratio = 1.0;
@@ -102,8 +122,7 @@ int main() {
 	camera cam(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus);
 
 	// Render
-
-	std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+	filestream << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
 	for (int j = image_height - 1; j >= 0; j--) {
 		std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
@@ -115,7 +134,7 @@ int main() {
 				auto v = (j + random_double()) / (image_height - 1);
 				pix += ray_color(cam.get_ray(u, v), background, world, max_depth);
 			}
-			write_color(std::cout, pix, samples_per_pixel);
+			write_color(filestream, pix, samples_per_pixel);
 		}
 	}
 
